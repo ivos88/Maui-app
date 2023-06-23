@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:TodoSQLite.Models"
+             x:Class="TodoSQLite.Views.TodoListPage"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             Title="Alle Personen"
+             Background="Black">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="new_contact.png" Clicked="OnItemAdded"/>
+    </ContentPage.ToolbarItems>
+
+    <VerticalStackLayout>
+        <SearchBar x:Name="SearchBar" Placeholder="Zoeken..." TextChanged="SearchBar_TextChanged" HorizontalOptions="FillAndExpand"/>
+        <CollectionView 
+                  VerticalOptions="Fill"
+                  ItemsSource="{Binding Items}"
+                  SelectionMode="Single"
+                  SelectionChanged="CollectionView_SelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:TodoItem">
+                    <Grid Margin="5" BackgroundColor="Gray">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="Afbeelding" Grid.Column="0" Source="{Binding Afbeelding}" HeightRequest="50" WidthRequest="50" Aspect="AspectFit"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding VoorNaam}" TextColor="Black" FontSize="Medium"/>
+                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding AchterNaam}" TextColor="Black" FontSize="Medium"/>
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+
+</ContentPage>

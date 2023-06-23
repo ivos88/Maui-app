@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoSQLite.Views.TodoItemPage"
+             Title="Persoon Detail"
+             xmlns:models="clr-namespace:TodoSQLite.Models"
+             x:DataType="models:TodoItem">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="save.png" Clicked="OnSaveClicked"/>
+        <ToolbarItem IconImageSource="trash.png" Clicked="OnDeleteClicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20"
+                             Spacing="10"
+                             VerticalOptions="StartAndExpand">
+
+            <Label Text="Voornaam" />
+            <Entry Text="{Binding VoorNaam}" />
+            <Label Text="Achternaam" />
+            <Entry Text="{Binding AchterNaam}" />
+            <Label Text="Telefoonnummer" />
+            <Entry Text="{Binding TelefoonNummer}" />
+
+            <HorizontalStackLayout>
+                <RadioButton 
+                             x:Name="radiobuttonman"
+                             Content="Man"
+                             IsChecked="{Binding IsMan}"
+                             GroupName="Geslacht"
+                             CheckedChanged="RadioButton_CheckedChanged"/>
+                <RadioButton 
+                             x:Name="radiobuttonvrouw"
+                             Content="Vrouw"
+                             IsChecked="{Binding IsVrouw}"
+                             GroupName="Geslacht"
+                             CheckedChanged="RadioButton_CheckedChanged" />
+                <RadioButton
+                             x:Name="radiobuttononbekend"
+                             Content="Onbekend"
+                             IsChecked="{Binding IsOnbekend}"
+                             GroupName="Geslacht"
+                             CheckedChanged="RadioButton_CheckedChanged" />
+            </HorizontalStackLayout>
+
+            <Image x:Name="LblAfbeelding"
+                   Source="{Binding Afbeelding}"
+                   WidthRequest="300"
+                   HeightRequest="400"
+                   Aspect="AspectFit">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="PhotoButton" 
+            Text="Foto Maken" 
+            TextColor="Black"
+            FontSize="Medium"
+            HeightRequest="50"
+            HorizontalOptions="Fill"
+            Grid.Column="0"
+            Clicked="PhotoButton_Clicked" />
+
+                <Button x:Name="GallaryPhotoButton" 
+            Text="Gallerij" 
+            TextColor="Black"
+            FontSize="Medium"
+            HeightRequest="50"
+            HorizontalOptions="Fill"
+            Grid.Column="1"
+            Clicked="GallaryPhotoButton_Clicked" />
+            </Grid>
+
+
+            <Button x:Name="CallButton" 
+                Text="Bellen" 
+                TextColor="Black"
+                FontSize="Medium"
+                HeightRequest="50"
+                HorizontalOptions="FillAndExpand" 
+                Clicked="CallButton_Clicked" />
+
+            <Button Text="Cancel"
+                TextColor="Black"
+                FontSize="Medium"
+                HeightRequest="50"
+                HorizontalOptions="FillAndExpand" 
+                Clicked="OnCancelClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
